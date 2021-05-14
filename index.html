@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="style.css">
   <title>BoolFlix</title>
 </head>
@@ -15,11 +16,15 @@
     <button @click="searchFor">Cerca</button>
 
     <ul>
-      <li class="movie" v-for="movie in moviesList">
-        <span>{{movie.title}}</span>
-        <span>{{movie.original_title}}</span>
+      <li class="movie" v-for="movie in completeList">
+        <img :src="'https://image.tmdb.org/t/p/w342' + movie.poster_path" alt="">
+        <span>Titolo: {{movie.title}}</span>
+        <span>Titolo originale: {{movie.original_title}}</span>
         <span>{{movie.original_language}}</span>
-        <span>{{movie.vote_average}}</span>
+        <span>
+          <i v-for="vote in movie.fullStars" class="fa fa-star yellow" aria-hidden="true"></i><!--
+          --><i v-for="vote in movie.emptyStars" class="fa fa-star-o" aria-hidden="true"></i>
+        </span>
       </li>
     </ul>
   </div>

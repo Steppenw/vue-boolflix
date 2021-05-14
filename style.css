@@ -5,8 +5,15 @@
   font-family: sans-serif;
 }*/
 
+ul {
+  list-style-type: none;
+}
+
 .movie > span {
   display: block;
 }
 
 /*UTILITIES*/
+.yellow {
+  color: yellow;
+}
