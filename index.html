@@ -11,9 +11,27 @@
   <title>BoolFlix</title>
 </head>
 <body>
+
   <div id="app">
-    <input type="text" v-model="stringToSearchFor">
-    <button @click="searchFor">Cerca</button>
+
+    <header>
+      <div class="container flex">
+
+        <div class="logo flex">
+          <i class="fa fa-film fa-4x" aria-hidden="true"></i>
+          <span class="fsz-35 ml-15">BOOLFLIX</span>
+        </div>
+
+        <div class="search">
+          <i class="fa fa-search" aria-hidden="true"></i>
+          <input type="text" v-model="stringToSearchFor" 
+          placeholder="Cerca un film o una serie TV" @keyup.esc="stringToSearchFor = ''" @keyup.enter="searchFor">
+          <i class="fa fa-times" aria-hidden="true" v-if="stringToSearchFor" @click="stringToSearchFor = ''"></i>
+          <button @click="searchFor">Cerca</button>
+        </div>
+
+      </div>
+    </header>
 
     <ul>
       <li class="movie" v-for="movie in completeList">
@@ -28,6 +46,8 @@
       </li>
     </ul>
   </div>
+
   <script src="app.js"></script>
+
 </body>
 </html>

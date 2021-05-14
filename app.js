@@ -11,6 +11,10 @@ new Vue(
     methods: {
       axiosSearch(byType) {
 
+        if (this.stringToSearchFor === '') {
+          return
+        }
+
         const axiosOptions = {
           params: {
             api_key: this.myAPIkey,
