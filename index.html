@@ -12,42 +12,80 @@
 </head>
 <body>
 
-  <div id="app">
+  <main class="flex-col" id="app">
 
-    <header>
-      <div class="container flex">
-
-        <div class="logo flex">
-          <i class="fa fa-film fa-4x" aria-hidden="true"></i>
-          <span class="fsz-35 ml-15">BOOLFLIX</span>
-        </div>
-
-        <div class="search">
-          <i class="fa fa-search" aria-hidden="true"></i>
-          <input type="text" v-model="stringToSearchFor" 
-          placeholder="Cerca un film o una serie TV" @keyup.esc="stringToSearchFor = ''" @keyup.enter="searchFor">
-          <i class="fa fa-times" aria-hidden="true" v-if="stringToSearchFor" @click="stringToSearchFor = ''"></i>
-          <button @click="searchFor">Cerca</button>
-        </div>
-
+    <!-- HEADER -->
+    <header class="flex">
+      
+      <div class="logo flex">
+        <i class="fa fa-film fa-4x" aria-hidden="true"></i>
+        <span class="fsz-35 ml-15">BOOLFLIX</span>
       </div>
-    </header>
 
-    <ul>
+      <div class="search">
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <input type="text" v-model="stringToSearchFor" 
+        placeholder="Cerca un film o una serie TV" @keyup.esc="stringToSearchFor = ''" @keyup.enter="searchFor">
+        <i class="fa fa-times" aria-hidden="true" v-if="stringToSearchFor" @click="stringToSearchFor = ''"></i>
+        <button @click="searchFor">Cerca</button>
+      </div>
+
+    </header>
+    <!-- /HEADER -->
+
+    <!-- BANNER -->
+    <section v-if="completeList.length === 0" class="banner flex">
+      <i class="fa fa-film fa-4x" aria-hidden="true"></i>
+      <span class="fsz-xxl">I MIGLIORI FILM E SERIE TV</span>
+      <i class="fa fa-television fa-4x" aria-hidden="true"></i>
+    </section>
+    <!-- /BANNER -->
+
+    <!-- RESULTS -->
+    <section v-else class="results flex">
+
+      <div class="content" v-for="movie in completeList">
+        <div v-if="movie.poster_path" class="poster">
+          <img class="bord-rad-10" :src="'https://image.tmdb.org/t/p/w342' + movie.poster_path" :alt="movie.title" />
+        </div>
+        <div v-else class="blank-poster bord-rad-10 flex-col">
+          <span class="fsz-20">{{movie.title}}</span>
+          <span>IMMAGINE NON DISPONIBILE</span>
+        </div>
+        <!-- INFO -->
+        <div class="info bord-rad-10">
+          <span><strong>Titolo: </strong>{{movie.title}}</span>
+          <span><strong>Titolo originale: </strong>{{movie.original_title}}</span>
+          <span><strong>Voto: </strong>
+            <i v-for="vote in movie.fullStars" class="fa fa-star yellow" aria-hidden="true"></i><!--
+            --><i v-for="vote in movie.emptyStars" class="fa fa-star-o" aria-hidden="true"></i>
+          </span>
+          <div class="text-justify"><strong>Trama: </strong>
+            <span v-if="movie.overview">{{movie.overview}}</span>
+            <span v-else>non disponibile</span>
+          </div>
+        </div>
+        <!-- /INFO -->
+      </div>
+
+    </section>
+    <!-- /RESULTS -->
+
+    <!--<ul>
       <li class="movie" v-for="movie in completeList">
-        <img :src="'https://image.tmdb.org/t/p/w342' + movie.poster_path" alt="">
+        <img :src="'https://image.tmdb.org/t/p/w342' + movie.poster_path" alt="" />
         <span>Titolo: {{movie.title}}</span>
         <span>Titolo originale: {{movie.original_title}}</span>
         <span>{{movie.original_language}}</span>
         <span>
-          <i v-for="vote in movie.fullStars" class="fa fa-star yellow" aria-hidden="true"></i><!--
-          --><i v-for="vote in movie.emptyStars" class="fa fa-star-o" aria-hidden="true"></i>
+          <i v-for="vote in movie.fullStars" class="fa fa-star yellow" aria-hidden="true"></i>
+          <i v-for="vote in movie.emptyStars" class="fa fa-star-o" aria-hidden="true"></i>
         </span>
       </li>
-    </ul>
-  </div>
+    </ul>-->
+
+  </main>
 
   <script src="app.js"></script>
-
 </body>
 </html>

@@ -5,25 +5,25 @@
   font-family: sans-serif;
 }
 
-/*HEADER*/
-header {
-  background-color: black;
+main {
+  height: 100vh;
+  background-color: #A0A0A0;
 }
 
-header > .container {
-  width: 85%;
-  margin: auto;
-  padding: 20px;
+/*HEADER*/
+main > header {
+  background-color: black;
+  padding: 20px 100px;
   justify-content: space-between;
   align-items: center;
 }
 
-.container > .logo {
+header > .logo {
   color: red;
   align-items: center;
 }
 
-.container > .search {
+header > .search {
   position: relative;
 }
 
@@ -43,7 +43,7 @@ header > .container {
 .search > i.fa-times {
   position: absolute;
   top: 7px;
-  right: 60px;
+  right: 65px;
   cursor: pointer;
 }
 
@@ -53,27 +53,106 @@ header > .container {
   cursor: pointer;
 }
 
-ul {
+/*BANNER*/
+main > .banner {
+  width: 50%;
+  margin: auto;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/*RESULTS*/
+main > .results {
+  flex-wrap: wrap;
+  overflow: auto;
+  justify-content: space-evenly;
+}
+
+.results > .content {
+  width: 342px;
+  height: 513px;
+  margin: 30px 0;
+}
+
+.poster > img {
+  width: 100%;
+  border: 2px solid white;
+}
+
+.content > .blank-poster {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.content:hover img, .content:hover > .blank-poster {
+  display: none;
+}
+
+.content:hover > .info {
+  display: block;
+}
+
+/*RESULTS-INFO*/
+.content > .info {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  background-color: black;
+  color: white;
+  overflow: auto;
+  display: none;
+}
+
+.info > span {
+  display: block;
+  margin: 10px 0;
+}
+
+/*ul {
   list-style-type: none;
 }
 
 .movie > span {
   display: block;
-}
+}*/
 
 /*UTILITIES*/
 .flex {
   display: flex;
 }
 
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.fsz-20 {
+  font-size: 20px;
+}
+
 .fsz-35 {
   font-size: 35px;
+}
+
+.fsz-xxl {
+  font-size: xx-large;
 }
 
 .ml-15 {
   margin-left: 15px;
 }
 
+.bord-rad-10 {
+  border-radius: 10px;
+}
+
 .yellow {
   color: yellow;
+}
+
+.text-justify {
+  text-align: justify;
 }
