@@ -46,7 +46,7 @@ new Vue(
             this.$set(movie, 'fullStars', 0);
             this.$set(movie, 'emptyStars', 0);
           })
-  
+          
           this.voteToStars();
         });
       },
@@ -61,6 +61,22 @@ new Vue(
           this.moviesList = resp.data.results;
         })
       }*/
+
+      flagOf(origLang) {
+
+        const flagsMap = {
+          'en': 'us',
+          'it': 'it',
+          'es': 'es'
+        }
+
+        if (flagsMap[origLang]) {
+          return `flag-icon-${flagsMap[origLang]}`;
+        }
+        else {
+          return '';
+        }
+      },
 
       voteToStars() {
         this.completeList.forEach((movie) => {
