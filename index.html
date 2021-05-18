@@ -34,6 +34,10 @@
     </header>
     <!-- /HEADER -->
 
+    <section v-if="searching === true" class="while-searching">
+      <span>Ricerca in corso...</span>
+    </section>
+
     <!-- BANNER -->
     <section v-if="completeList.length === 0" class="banner flex">
       <i class="fa fa-film fa-4x" aria-hidden="true"></i>

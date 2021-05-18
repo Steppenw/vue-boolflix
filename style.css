@@ -53,6 +53,10 @@ header > .search {
   cursor: pointer;
 }
 
+.while-searching {
+  margin: 50px auto;
+}
+
 /*BANNER*/
 main > .banner {
   width: 50%;

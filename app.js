@@ -6,7 +6,8 @@ new Vue(
       stringToSearchFor: '',
       moviesList: [],
       tvShowsList: [],
-      completeList: []
+      completeList: [],
+      searching: false
     },
     methods: {
       axiosSearch(byType) {
@@ -14,6 +15,8 @@ new Vue(
         if (this.stringToSearchFor === '') {
           return
         }
+
+        this.searching = true;
 
         const axiosOptions = {
           params: {
@@ -26,21 +29,54 @@ new Vue(
         axios.get('https://api.themoviedb.org/3/search/' + byType, axiosOptions).then((resp) => {
           //console.log(resp.data);
           if (byType === 'movie') {
-            this.moviesList = resp.data.results;
-            //console.log(this.moviesList);
+
+            const tempMoviesList = [];
+
+            for (let i=0; i<resp.data.results.length; i++) {
+              //console.log(resp.data.results[i]);
+              tempMoviesList.push(resp.data.results[i]);
+            }
+            //console.log('tempMoviesList', tempMoviesList);
+
+            if (tempMoviesList.length === resp.data.results.length) {
+              this.moviesList = tempMoviesList;
+            }
+            //console.log('moviesList', this.moviesList);
           }
           else if (byType === 'tv') {
-            this.tvShowsList = resp.data.results.map((tvShow) => {
+
+            const tempTvShowsList = [];
+
+            for (let i=0; i<resp.data.results.length; i++) {
+              //console.log(resp.data.results[i]);
+              tempTvShowsList.push(resp.data.results[i]);
+            }
+            //console.log('tempTvShowsList', tempTvShowsList);
+
+            if (tempTvShowsList.length === resp.data.results.length) {
+
+              this.tvShowsList = tempTvShowsList.map((tvShow) => {
+                tvShow.original_title = tvShow.original_name;
+                tvShow.title = tvShow.name;
+
+                return tvShow;
+              });
+            }
+            //console.log('tvShowsList', this.tvShowsList);
+
+            /*this.tvShowsList = resp.data.results.map((tvShow) => {
               tvShow.original_title = tvShow.original_name;
               tvShow.title = tvShow.name;
 
               return tvShow;
             });
-            //console.log(this.tvShowsList);
+            //console.log(this.tvShowsList);*/
           }
           
           this.completeList = this.moviesList.concat(this.tvShowsList);
           //console.log(this.completeList);
+
+          this.searching = false;
 
           this.completeList.forEach((movie) => {
             this.$set(movie, 'fullStars', 0);
